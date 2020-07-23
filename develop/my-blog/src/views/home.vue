@@ -1,7 +1,7 @@
 <template>
     <div class="home">
         <div id="nav">
-            <router-link to="/About.html">About</router-link>
+            <router-link to="/about/index.html">About</router-link>
         </div>
         <img alt="Vue logo" src="../assets/logo.png" />
         <HelloWorld :msg="msg"/>

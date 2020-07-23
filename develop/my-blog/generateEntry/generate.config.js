@@ -13,7 +13,7 @@ const allChildFiles = (() => {
 })();
 const fileNames = [];
 for (let name of allChildFiles) {
-    fileNames.push(name.replace(/\.[^/.]+$/, ".html"));
+    fileNames.push(name.replace(/\.[^/.]+$/, "/index.html"));
 }
 module.exports = {
     useHistory: true,

@@ -1,6 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
-import index from "../views/index.vue";
+import home from "../views/home.vue";
 import { getBaseUrl } from "../utils/index.js";
 
 Vue.use(Router);
@@ -11,22 +11,22 @@ export default new Router({
     routes: [
         {
             path: "/",
-            redirect: "/index.html",
+            redirect: "/home/index.html",
         },
         {
-            path: "/index.html",
-            name: "index.html",
-            component: index
+            path: "/home/index.html",
+            name: "home/index.html",
+            component: home
         },
         {
-            path: "/about.html",
-            name: "about.html",
+            path: "/about/index.html",
+            name: "about/index.html",
             component: () =>
                 import(/* webpackChunkName: "about" */ "../views/about.vue")
         },
         {
-            path: "/detail.html",
-            name: "detail.html",
+            path: "/detail/index.html",
+            name: "detail/index.html",
             component: () =>
                 import(/* webpackChunkName: "detail" */ "../views/detail.vue")
         }

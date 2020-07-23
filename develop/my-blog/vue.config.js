@@ -4,7 +4,7 @@ const SkeletonWebpackPlugin = require('vue-skeleton-webpack-plugin');
 
 module.exports = {
     outputDir: "./dist",
-    publicPath: "./",
+    publicPath: "../",
     configureWebpack: config => {
         const { htmlToBeInsert } = generateEntry();
         config.plugins = [
