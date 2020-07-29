@@ -1,12 +1,17 @@
 <template>
   <div id="app">
-    <transition :name="transationName">
-        <router-view/>
-    </transition>
+        <NavBar />
+        <el-card class="box-card">
+            <!-- <router-view/> -->
+            <transition :name="transationName">
+                <router-view/>
+            </transition>
+        </el-card>
   </div>
 </template>
 
 <script>
+import NavBar from "./container/NavBar.vue";
 export default {
     data() {
         return {
@@ -34,28 +39,21 @@ export default {
             }
         }
     },
+    components: {NavBar},
     methods: {}
 }
 </script>
 
 
 <style lang="scss">
-#app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+*{
+    margin: 0;
+    padding: 0;
 }
-#nav {
-    padding: 30px;
-    a {
-        font-weight: bold;
-        color: #2c3e50;
-        &.router-link-exact-active {
-            color: #42b983;
-        }
-    }
+#app {
+    min-height: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .slide-fade-left, .slide-fade-right {
@@ -85,4 +83,11 @@ export default {
     transform: translateX(-50px);
     opacity: 0;
 }
+
+.box-card {
+    width: 1400px;
+    margin: 20px 20px 20px 40px;
+    height: 100%;
+}
+
 </style>

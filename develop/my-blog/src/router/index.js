@@ -13,18 +13,28 @@ export default new Router({
             path: "/",
             redirect: "/home/index.html",
         },
-        {
+        {   
+            // 首页
             path: "/home/index.html",
             name: "home/index.html",
             component: home
         },
         {
+            // 系列
+            path: "/series/index.html",
+            name: "series/index.html",
+            component: () =>
+                import(/* webpackChunkName: "series" */ "../views/series.vue")
+        },
+        {   
+            // 关于
             path: "/about/index.html",
             name: "about/index.html",
             component: () =>
                 import(/* webpackChunkName: "about" */ "../views/about.vue")
         },
-        {
+        {   
+            // 详情
             path: "/detail/index.html",
             name: "detail/index.html",
             component: () =>
