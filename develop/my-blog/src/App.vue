@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-        <NavBar />
+        <NavBar :currentPath="currentPath"/>
         <el-card class="box-card">
             <!-- <router-view/> -->
             <transition :name="transationName">
@@ -16,27 +16,34 @@ export default {
     data() {
         return {
             transationName: "slide-fade-right",
-            routeStack: []
+            routeStack: [],
+            currentPath: ""
         }
     },
     watch: {
-        '$route' (to, from) {
-            let length = this.routeStack.length;
-            let lastStack = length ? this.routeStack[length - 1] : {};
-            if (!length) {
-                this.routeStack.push({
-                    to: to.name, from: from.name
-                });
-                this.transationName = "slide-fade-right";
-            } else if (lastStack.to == from.name && lastStack.from == to.name) {
-                this.routeStack.pop();
-                this.transationName = "slide-fade-left";
-            } else {
-                this.routeStack.push({
-                    to: to.name, from: from.name
-                });
-                this.transationName = "slide-fade-right";
-            }
+        "$route": {
+            handler(to, from) {
+                let fromRoute = from ? from : {};
+                this.currentPath = to.path;
+                let length = this.routeStack.length;
+                let lastStack = length ? this.routeStack[length - 1] : {};
+                if (!length) {
+                    this.routeStack.push({
+                        to: to.name, from: fromRoute.name
+                    });
+                    this.transationName = "slide-fade-right";
+                } else if (fromRoute && lastStack.to == fromRoute.name && lastStack.from == to.name) {
+                    this.routeStack.pop();
+                    this.transationName = "slide-fade-left";
+                } else {
+                    this.routeStack.push({
+                        to: to.name, from: fromRoute.name
+                    });
+                    this.transationName = "slide-fade-right";
+                }
+            },
+            // deep: true,
+            immediate: true
         }
     },
     components: {NavBar},

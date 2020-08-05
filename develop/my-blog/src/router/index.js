@@ -26,6 +26,13 @@ export default new Router({
             component: () =>
                 import(/* webpackChunkName: "series" */ "../views/series.vue")
         },
+        {
+            // 系列-目录
+            path: "/catalog/index.html",
+            name: "catalog/index.html",
+            component: () =>
+                import(/* webpackChunkName: "catalog" */ "../views/catalog.vue")
+        },
         {   
             // 关于
             path: "/about/index.html",

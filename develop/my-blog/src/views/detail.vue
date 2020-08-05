@@ -1,10 +1,11 @@
+<!-- 详情 -->
 <template>
     <div class="detail-wrapper">
-        <!-- <div id="nav">
-            <router-link to="/">Home</router-link>
-        </div> -->
-        <p class="detail-title">{{ detailTitle }}</p>
-        <div v-html="pageHtml"></div>
+        <div v-if="resultArr.length">
+            <p class="detail-title">{{ detailTitle }}</p>
+            <div v-html="pageHtml"></div>
+        </div>
+        <div v-else>更新中, 敬请期待</div>
     </div>
 </template>
 <script>
@@ -13,27 +14,45 @@ export default {
     data() {
         return {
             detailTitle: "页面标题",
-            pageHtml: ""
+            pageHtml: "",
+            resultArr: []
         }
     },
     computed: {
-        ...mapState(["detailList"])
+        ...mapState(["articleDetailList", "seriesDetailList"])
     },
     created() {
-        let articleId = this.$route.query.articleId;
-        console.log("--articleId:", articleId);
-        this.detailList.map((item) => {
-            if (item.articleId === articleId) {
-                this.detailTitle = item.detailTitle;
-                let detailText = item.detailText;
-                console.log("--detailText:", detailText)
-                let reg = /\<script/g;
-                let reg2 = /\<\/script/g;
-                detailText = detailText.replace(reg, "&lt;script");
-                detailText = detailText.replace(reg2, "&lt;/script>");
-                this.pageHtml = detailText;
-            }
-        })
+        let detailId = this.$route.query.detailId;
+        let sourceType = this.$route.query.type;
+        console.log("--detailId:", detailId);
+        if (sourceType === "article") {
+            this.resultArr = this.articleDetailList.filter((item) => {
+                if (item.detailId === detailId) {
+                    this.detailTitle = item.detailTitle;
+                    let detailText = item.detailText;
+                    console.log("--detailText:", detailText)
+                    let reg = /<script/g;
+                    let reg2 = /<\/script/g;
+                    detailText = detailText.replace(reg, "&lt;script");
+                    detailText = detailText.replace(reg2, "&lt;/script>");
+                    this.pageHtml = detailText;
+                    return item;
+                }
+            });
+        } else {
+            this.resultArr = this.seriesDetailList.filter((item) => {
+                if (item.detailId === detailId) {
+                    this.detailTitle = item.detailTitle;
+                    let detailText = item.detailText;
+                    let reg = /<script/g;
+                    let reg2 = /<\/script/g;
+                    detailText = detailText.replace(reg, "&lt;script");
+                    detailText = detailText.replace(reg2, "&lt;/script>");
+                    this.pageHtml = detailText;
+                    return item;
+                }
+            });
+        }
     }
 }
 </script>
@@ -55,7 +74,7 @@ export default {
     // 用于段落标题
     h1 {
         width: 90%;
-        margin: 0 auto;
+        margin: 40px auto 0;
         font-size: 20px;
         height: 30px;
         line-height: 30px;
@@ -71,6 +90,7 @@ export default {
         font-size: 18px;
         text-indent: 36px;
         font-weight: normal;
+        line-height: 40px;
     }
 
 

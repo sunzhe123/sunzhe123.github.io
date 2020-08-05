@@ -31,11 +31,11 @@ export default {
 
     methods: {
         handleDetail(id) {
-            console.log("---id:", id)
             this.$router.push({
                 path: "/detail/index.html",
                 query: {
-                    articleId: id
+                    detailId: id,
+                    type: "article"
                 }
             });
         }
@@ -62,6 +62,11 @@ export default {
             margin: 10px auto;
             height: 100px;
             background: #EEE;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
         }
 
         .article-title {

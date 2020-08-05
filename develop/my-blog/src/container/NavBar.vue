@@ -2,9 +2,9 @@
     <div class="nav-bar-wrapper">
         <PortraitView class="portrait-view-style" />
         <div class="nav-bar-list">
-            <router-link class="nav-bar-item" to="/home/index.html">文章</router-link>
-            <router-link class="nav-bar-item" to="/series/index.html">系列</router-link>
-            <router-link class="nav-bar-item"  to="/about/index.html">关于</router-link>
+            <router-link class="nav-bar-item" :class="'/home/index.html' | getClassName(currentPath)" to="/home/index.html">文章</router-link>
+            <router-link class="nav-bar-item" :class="'/series/index.html' | getClassName(currentPath)" to="/series/index.html">系列</router-link>
+            <router-link class="nav-bar-item" :class="'/about/index.html' | getClassName(currentPath)" to="/about/index.html">关于</router-link>
         </div>
     </div>
 </template>
@@ -12,9 +12,24 @@
 <script>
     import PortraitView from "../components/PortraitView.vue";
     export default {
-        props: {},
+        props: {
+            currentPath: {
+                type: String
+            }
+        },
+        filters: {
+            getClassName(path, currentPath) {
+                if (path == currentPath) {
+                    return "nav-bar-item-active";
+                }
+                return "";
+            }
+        },
         components: {
             PortraitView
+        },
+        watch: {
+
         }
     }
 </script>
@@ -67,7 +82,7 @@
         margin-top: 150px;
     }
 
-    .nav-bar-item:hover {
+    .nav-bar-item-active, .nav-bar-item:hover {
         background: #FFF;
         color: #3818f8;
     }
