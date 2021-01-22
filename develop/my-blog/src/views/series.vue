@@ -36,14 +36,14 @@ export default {
     flex-wrap: wrap;
 
     .series-card {
-        width: 300px;
+        width: 20%;
         height: 200px;
-        margin-right: 50px;
+        margin-right: 5%;
         margin-top: 20px;
         cursor: pointer;
 
         .series-img {
-            width: 250px;
+            width: 100%;
             margin: 10px auto;
             height: 100px;
             background: #EEE;
@@ -55,7 +55,7 @@ export default {
         }
 
         .series-title {
-            width: 250px;
+            width: 100%;
             margin: 0 auto;
             height: 40px;
             line-height: 40px;

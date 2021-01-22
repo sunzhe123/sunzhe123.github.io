@@ -106,6 +106,15 @@ export default {
         width: 80%;
         margin: 20px auto;
         background: #999;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        color: #082552;
+
+        xmp {
+            width: 100%;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
     }
 }
 </style>
